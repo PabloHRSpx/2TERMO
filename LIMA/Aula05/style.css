@@ -1,0 +1,27 @@
+h1{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: brown;
+    margin: 30px;
+    padding: 30px;
+}
+
+body{
+    background-color: rgb(235, 235, 209);
+    font-family: Caveat;
+    font-weight: bold;
+}
+/* CLASSE para mais de uma atribuição ou formatação*/
+.seletor{
+    color: brown;
+    padding: 30px;
+    line-height: 20px;
+}
+/* ID para uma formatação só*/
+#texto{
+    color: brown;
+}
+h2{
+    font-family: Caveat;
+    font-weight: bold;
+    text-align: center;
+}
