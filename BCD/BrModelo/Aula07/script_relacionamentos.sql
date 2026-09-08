@@ -42,3 +42,18 @@ CREATE TABLE FORNECEDOR_PRODUTO (
 SELECT * FROM PRODUTOS;
 
 INSERT INTO PRODUTOS (NOME_PRODUTO) VALUES ('CAMISETA');
+
+-- QUESTÃO 1
+-- 1,n -- 1,1
+
+-- QUESTÃO 2
+-- 1,n -- 1,1
+
+-- QUESTÃO 3
+-- 1,n -- 1,n
+
+-- QUESTÃO 4
+-- 0,n -- 1,1
+
+-- QUESTÃO 5
+-- 1,n -- 1,1
