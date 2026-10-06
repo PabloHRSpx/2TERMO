@@ -1,0 +1,12 @@
+[
+  {
+    "nome": "suporte",
+    "quantidade": 15,
+    "custoUnitario": 35
+  },
+  {
+    "nome": "menta",
+    "quantidade": 10,
+    "custoUnitario": 25
+  }
+]
