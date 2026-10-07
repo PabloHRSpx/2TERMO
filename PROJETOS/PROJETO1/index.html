@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermercado Econômico</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background-color: #f5f5f5; }
+
+        header {
+            background-color: #2e7d32;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 { font-size: 1.5em; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; }
+        nav a:hover { text-decoration: underline; }
+
+        .sacola-btn {
+            background: white;
+            color: #2e7d32;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .sacola-btn:hover { background: #e0e0e0; }
+
+        .banner {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .banner h2 { font-size: 1.8em; margin-bottom: 10px; }
+
+        .secao-titulo {
+            font-size: 1.4em;
+            color: #2e7d32;
+            padding: 20px 20px 5px;
+            border-bottom: 2px solid #2e7d32;
+            margin: 0 20px;
+        }
+
+        .produtos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px;
+            justify-content: center;
+        }
+        .produto {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            width: 170px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .produto img { width: 100px; height: auto; margin-bottom: 10px; }
+        .produto h3 { font-size: 0.95em; margin-bottom: 5px; }
+        .produto .preco { color: #2e7d32; font-weight: bold; font-size: 1.1em; }
+        .produto button {
+            margin-top: 10px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85em;
+        }
+        .produto button:hover { background: #1b5e20; }
+
+        footer {
+            background-color: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🛒 Supermercado Econômico</h1>
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="categorias.html">Categorias</a>
+        <a href="cupons.html">🎟️ Cupons</a>
+        <a href="sacola.html" class="sacola-btn">🛍️ Sacola (<span id="contador">0</span>)</a>
+    </nav>
+</header>
+
+<div class="banner">
+    <h2>Ofertas da Semana</h2>
+    <p>Preços baixos todos os dias!</p>
+</div>
+
+<h2 class="secao-titulo" id="mercado">🥬 Mercado</h2>
+<div class="produtos" id="secao-mercado"></div>
+
+<h2 class="secao-titulo" id="carnes">🥩 Carnes</h2>
+<div class="produtos" id="secao-carnes"></div>
+
+<h2 class="secao-titulo" id="guloseimas">🍫 Guloseimas</h2>
+<div class="produtos" id="secao-guloseimas"></div>
+
+<h2 class="secao-titulo" id="limpeza">🧴 Produtos de Limpeza</h2>
+<div class="produtos" id="secao-limpeza"></div>
+
+<h2 class="secao-titulo" id="verduras">🥕 Verduras</h2>
+<div class="produtos" id="secao-verduras"></div>
+
+<footer>
+    <p>&copy; 2026 Supermercado Econômico | Av. Central, 123 - São Paulo/SP</p>
+</footer>
+
+<script>
+    const secoes = {
+        mercado: [
+            { id: 1, nome: "Arroz 5kg", preco: 24.90, img: "arroz.jpg" },
+            { id: 2, nome: "Feijão 1kg", preco: 8.50, img: "feijao.jpg" },
+            { id: 3, nome: "Leite 1L", preco: 4.99, img: "leite.jpg" },
+            { id: 4, nome: "Pão Francês", preco: 12.00, img: "pao.jpg" },
+            { id: 5, nome: "Café 500g", preco: 15.90, img: "cafe.jpg" }
+        ],
+        carnes: [
+            { id: 6, nome: "Bife Grelhado 1kg", preco: 34.90, img: "bife.jpg" },
+            { id: 7, nome: "Frango Inteiro", preco: 14.90, img: "frango.jpg" },
+            { id: 8, nome: "Peito de Peru 1kg", preco: 29.90, img: "peru.jpg" },
+            { id: 9, nome: "Hambúrguer 500g", preco: 18.50, img: "hamburguer.jpg" },
+            { id: 10, nome: "Linguiça 500g", preco: 12.90, img: "linguica.jpg" }
+        ],
+        guloseimas: [
+            { id: 11, nome: "Chocolate 90g", preco: 6.99, img: "chocolate.jpg" },
+            { id: 12, nome: "Bala de Goma 100g", preco: 4.50, img: "bala.jpg" },
+            { id: 13, nome: "Biscoito Recheado", preco: 8.90, img: "bisnito.jpg" },
+            { id: 14, nome: "Gelatina 25g", preco: 2.49, img: "gelatina.jpg" },
+            { id: 15, nome: "Balas Mistas 200g", preco: 9.90, img: "balas.jpg" }
+        ],
+        limpeza: [
+            { id: 16, nome: "Detergente 500ml", preco: 3.49, img: "detergente.jpg" },
+            { id: 17, nome: "Sabão em Pó 1kg", preco: 12.90, img: "sabao.jpg" },
+            { id: 18, nome: "Água Sanitária 2L", preco: 5.99, img: "agua-sanitaria.jpg" },
+            { id: 19, nome: "Desinfetante 1L", preco: 7.50, img: "desinfetante.jpg" },
+            { id: 20, nome: "Papel Higiênico 12un", preco: 14.90, img: "papel.jpg" }
+        ],
+        verduras: [
+            { id: 21, nome: "Alface 1un", preco: 3.99, img: "alface.jpg" },
+            { id: 22, nome: "Tomate 1kg", preco: 6.90, img: "tomate.jpg" },
+            { id: 23, nome: "Cebola 1kg", preco: 4.50, img: "cebola.jpg" },
+            { id: 24, nome: "Batata 1kg", preco: 5.99, img: "batata.jpg" },
+            { id: 25, nome: "Cenoura 1kg", preco: 4.29, img: "cenoura.jpg" }
+        ]
+    };
+
+    const todosProdutos = [...secoes.mercado, ...secoes.carnes, ...secoes.guloseimas, ...secoes.limpeza, ...secoes.verduras];
+
+    let sacola = JSON.parse(localStorage.getItem("sacola")) || [];
+
+    function salvarSacola() {
+        localStorage.setItem("sacola", JSON.stringify(sacola));
+    }
+
+    function renderizarSecao(containerId, produtos) {
+        document.getElementById(containerId).innerHTML = produtos.map(p => `
+            <div class="produto">
+                <img src="${p.img}" alt="${p.nome}">
+                <h3>${p.nome}</h3>
+                <p class="preco">R$ ${p.preco.toFixed(2).replace('.', ',')}</p>
+                <button onclick="adicionar(${p.id})">+ Adicionar</button>
+            </div>
+        `).join("");
+    }
+
+    function adicionar(id) {
+        const item = sacola.find(i => i.id === id);
+        if (item) {
+            item.qtd++;
+        } else {
+            const prod = todosProdutos.find(p => p.id === id);
+            sacola.push({ ...prod, qtd: 1 });
+        }
+        salvarSacola();
+        atualizarContador();
+    }
+
+    function atualizarContador() {
+        const totalQtd = sacola.reduce((s, i) => s + i.qtd, 0);
+        document.getElementById("contador").textContent = totalQtd;
+    }
+
+    renderizarSecao("secao-mercado", secoes.mercado);
+    renderizarSecao("secao-carnes", secoes.carnes);
+    renderizarSecao("secao-guloseimas", secoes.guloseimas);
+    renderizarSecao("secao-limpeza", secoes.limpeza);
+    renderizarSecao("secao-verduras", secoes.verduras);
+    atualizarContador();
+</script>
+
+</body>
+</html>   

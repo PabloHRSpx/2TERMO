@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cupons - Supermercado Econômico</title>
+    <style> 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background-color: #f5f5f5; }
+
+        header {
+            background-color: #2e7d32;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 { font-size: 1.5em; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; }
+        nav a:hover { text-decoration: underline; }
+
+        .sacola-btn {
+            background: white;
+            color: #2e7d32;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .sacola-btn:hover { background: #e0e0e0; }
+
+        .container { max-width: 550px; margin: 30px auto; padding: 0 20px; }
+        .container h2 { color: #2e7d32; margin-bottom: 5px; text-align: center; font-size: 1.6em; }
+        .container .sub { text-align: center; color: #666; margin-bottom: 25px; }
+
+        /* Lista de cupons disponíveis para copiar */
+        .disponiveis-section { margin-bottom: 25px; }
+        .disponiveis-section h3 { color: #2e7d32; font-size: 1.1em; margin-bottom: 10px; }
+        .grid-disponiveis { display: flex; flex-direction: column; gap: 8px; }
+        .card-disponivel {
+            background: #e8f5e9;
+            border: 1px dashed #2e7d32;
+            border-radius: 8px;
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-disponivel .codigo-txt { font-weight: bold; color: #1b5e20; }
+        .card-disponivel .desc-txt { font-size: 0.85em; color: #444; margin-top: 2px; }
+        .btn-copiar {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+        .btn-copiar:hover { background: #1b5e20; }
+
+        .cupom-box {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .cupom-box label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.95em; }
+        .cupom-box input {
+            width: 100%;
+            padding: 12px;
+            border: 2px dashed #2e7d32;
+            border-radius: 8px;
+            font-size: 1.2em;
+            text-align: center;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+        .btn-resgatar {
+            width: 100%;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-resgatar:hover { background: #1b5e20; }
+
+        .msg { margin-top: 15px; font-weight: bold; display: none; }
+        .msg.sucesso { color: #2e7d32; display: block; }
+        .msg.erro { color: #d32f2f; display: block; }
+
+        .meus-cupons { margin-top: 30px; }
+        .meus-cupons h3 { color: #2e7d32; margin-bottom: 15px; }
+        .cupom-item {
+            background: white;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .cupom-item .info strong { display: block; margin-bottom: 4px; color: #2e7d32; }
+        .cupom-item .info p { font-size: 0.85em; color: #666; }
+        .cupom-item .acoes { display: flex; align-items: center; gap: 12px; }
+        .cupom-item .desconto { color: #2e7d32; font-weight: bold; font-size: 1em; }
+        .btn-remover {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            cursor: pointer;
+        }
+        .btn-remover:hover { background: #ffcdd2; }
+
+        .cupom-vazio { text-align: center; color: #999; padding: 20px 0; }
+
+        .btn-voltar {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.95em;
+        }
+
+        footer {
+            background-color: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🛒 Supermercado Econômico</h1>
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="categorias.html">Categorias</a>
+        <a href="sacola.html" class="sacola-btn">🛍️ Sacola (<span id="contador">0</span>)</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h2>🎟️ Cupons de Desconto</h2>
+    <p class="sub">Digite ou selecione o código do cupom para resgatar</p>
+
+    <!-- Seção com cupons ativos na loja -->
+    <div class="disponiveis-section">
+        <h3>Cupons disponíveis hoje:</h3>
+        <div class="grid-disponiveis" id="lista-disponiveis"></div>
+    </div>
+
+    <!-- Formulário de resgate -->
+    <div class="cupom-box">

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background-color: #f5f5f5; }
+
+        header {
+            background-color: #2e7d32;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 { font-size: 1.5em; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; }
+        nav a:hover { text-decoration: underline; }
+
+        .container { max-width: 500px; margin: 30px auto; padding: 0 20px; }
+
+        .checkout-box {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .checkout-box h2 { margin-bottom: 20px; color: #2e7d32; }
+        .checkout-box label { display: block; margin-bottom: 5px; font-size: 0.9em; font-weight: bold; }
+        .checkout-box input, .checkout-box select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.95em;
+        }
+        .btn-pagar {
+            width: 100%;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+        .btn-pagar:hover { background: #1b5e20; }
+        .btn-voltar {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .resumo {
+            background: #e8f5e9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .resumo h3 { color: #2e7d32; margin-bottom: 10px; }
+        .resumo p { font-size: 0.9em; margin-bottom: 5px; }
+        .resumo .total { font-weight: bold; font-size: 1.1em; color: #2e7d32; }
+
+        .sucesso {
+            display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+        .sucesso h2 { color: #2e7d32; margin-bottom: 10px; }
+        .sucesso p { color: #666; margin-bottom: 20px; }
+
+        footer {
+            background-color: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🛒 Supermercado Econômico</h1>
+    <nav>
+        <a href="sacola.html">← Voltar à Sacola</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="checkout-box" id="form-box">
+        <h2>📦 Checkout</h2>
+
+        <div class="resumo" id="resumo"></div>
+
+        <form onsubmit="finalizar(event)">
+            <label>Nome completo</label>
+            <input type="text" placeholder="Seu nome" required>
+            <label>E-mail</label>
+            <input type="email" placeholder="seu@email.com" required>
+            <label>Endereço</label>
+            <input type="text" placeholder="Rua, número, bairro" required>
+            <label>Forma de pagamento</label>
+            <select required>
+                <option value="">Selecione...</option>
+                <option>Cartão de Crédito</option>
+                <option>PIX</option>
+                <option>Dinheiro</option>
+                <option>Cartão de Débito</option>
+            </select>
+            <button type="submit" class="btn-pagar">Pagar</button>
+        </form>
+    </div>
+
+    <div class="sucesso" id="sucesso">
+        <h2>✅ Pedido Confirmado!</h2>
+        <p id="msg-sucesso"></p>
+        <a href="index.html" class="btn-pagar" style="display:inline-block;text-decoration:none;padding:12px 30px;">Voltar à Loja</a>
+    </div>
+
+    <a href="sacola.html" class="btn-voltar" id="link-voltar">← Voltar à sacola</a>
+</div>
+
+<footer>
+    <p>&copy; 2026 Supermercado Econômico | Av. Central, 123 - São Paulo/SP</p>
+</footer>
+
+<script>
+    let sacola = JSON.parse(localStorage.getItem("sacola")) || [];
+
+    function salvarSacola() {
+        localStorage.setItem("sacola", JSON.stringify(sacola));
+    }
+
+    function renderizarResumo() {
+        const resumo = document.getElementById("resumo");
+        if (sacola.length === 0) {
+            resumo.innerHTML = "<p>Sua sacola está vazia. <a href='index.html'>Voltar à loja</a></p>";
+            document.getElementById("form-box").style.display = "none";
+            document.getElementById("link-voltar").style.display = "none";
+            return;
+        }
+        const itens = sacola.map(i => `<p>${i.qtd}x ${i.nome} — R$ ${(i.preco * i.qtd).toFixed(2).replace('.', ',')}</p>`).join("");
+        const total = sacola.reduce((s, i) => s + i.preco * i.qtd, 0);
+        resumo.innerHTML = `<h3>Resumo do pedido</h3>${itens}<p class="total">Total: R$ ${total.toFixed(2).replace('.', ',')}</p>`;
+    }
+
+    function finalizar(e) {
+        e.preventDefault();
+        const total = sacola.reduce((s, i) => s + i.preco * i.qtd, 0);
+        sacola = [];
+        salvarSacola();
+
+        document.getElementById("form-box").style.display = "none";
+        document.getElementById("link-voltar").style.display = "none";
+        document.getElementById("sucesso").style.display = "block";
+        document.getElementById("msg-sucesso").textContent = `Total pago: R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    renderizarResumo();
+</script>
+
+</body>
+</html>   
