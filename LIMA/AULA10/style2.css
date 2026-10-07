@@ -1,0 +1,40 @@
+.equipe {
+    display: flex;
+    gap: 30px;
+}
+
+.equipee {
+    display: flex;
+    gap: 30px;
+    width: 60px 8%;
+    height: 200px;
+    justify-content: space-evenly;
+    background-color: bisque;
+}
+
+.Ana {
+    display: flex;
+    align-items: flex-start;
+}
+
+.Bruno {
+    display: flex;
+    align-items: center;
+}
+
+.Carla {
+    display: flex;
+    align-items: flex-end;
+}
+
+.cards {
+display: flex;
+gap: 20px;
+}
+
+.servicos {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    
+}
