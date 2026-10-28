@@ -4,7 +4,27 @@ body {
 h1 {
     color: #FFF7E6;
 }
-
-.nostalgia h3 {
+.nostalgia {
     color: #FFF7E6;
+}
+
+
+.play {
+    color: #FF3D81;
+}
+
+header {
+    background-color: #171A31;
+}
+
+p {
+    color: #C7CADB;
+}
+
+.H-azul {
+    color: #18D9FF;
+}
+
+.H-amarelo {
+    color: #FFD84D;
 }
