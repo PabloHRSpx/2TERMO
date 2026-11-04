@@ -1,5 +1,5 @@
 body {
-    background-color: #b9b9b9;
+    background-color: #101225;
 }
 h1 {
     color: #FFF7E6;
@@ -14,7 +14,8 @@ h1 {
 }
 
 header {
-    background-color: #171A31;
+    background-color: #090A16;
+    height: 90px;
 }
 
 p {
@@ -28,3 +29,40 @@ p {
 .H-amarelo {
     color: #FFD84D;
 }
+
+.começo h4 {
+    color: #FFF7E6;
+}
+
+.cartao h2 {
+    color: #FFF7E6;
+}
+
+.personagens h2 {
+    color: #FFF7E6;
+}
+
+.desenhos h2 {
+    color: #FFF7E6;
+}
+
+footer {
+    background-color: #090A16;
+}
+
+nav a {
+    display: flex;
+    gap: 23px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 8%;
+    
+}
+
