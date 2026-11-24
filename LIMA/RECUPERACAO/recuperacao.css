@@ -1,28 +1,30 @@
-/* Cores que vou usar:
-cinza: #808080
-preto: #000000 
-branco: #FFFFFF
 
-Fontes que vou usar:
-'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif'
-'Cambria, Cochin, Georgia, Times, 'Times New Roman', serif'
-*/
+* {
+    box-sizing: border-box;
+}
 
+body {
+    margin: 8px;
+    background: #FFFFFF;
+    color: #000000;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* 1. Cabeçalho */
 .inicio {
     background-image: linear-gradient(-20deg, #808080, #000000);
     display: flex;
-    border: 2px solid #808080;
-    height: 80px;
+    min-height: 80px;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
+    padding: 0 24px;
+    border: 2px solid #808080;
+    gap: 20px;
 }
 
 .inicio a {
-    display: flex;
-    text-decoration: none;
-    list-style: none;
-    justify-content: space-between;
     color: #FFFFFF;
+    text-decoration: none;
 }
 
 .inicio h1 {
@@ -33,62 +35,222 @@ Fontes que vou usar:
 .navegacao {
     display: flex;
     flex-direction: row;
-    gap: 48px;
+    align-items: center;
     justify-content: center;
-
+    flex-wrap: wrap;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
+/* 2. Área de destaque */
 .conteudo-inicio {
     background-color: #808080;
     display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 24px;
+    min-height: 190px;
+    margin-top: 10px;
+    padding: 20px;
 }
 
 .conteudo-art {
+    flex: 1;
     display: flex;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 16px;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    margin: 30px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 10px;
     padding: 10px;
     color: #FFFFFF;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
 }
 
-img {
+.conteudo-art h2 {
+    margin: 0 0 12px;
+}
+
+.conteudo-art p {
+    margin: 0 0 14px;
+}
+
+.botao {
+    display: inline-block;
+    padding: 9px 14px;
+    color: #FFFFFF;
+    background: #000000;
+    border: 1px solid #FFFFFF;
+    text-decoration: none;
+}
+
+.imagem-destaque {
+    flex: 1;
+    margin: 0;
+    max-width: 360px;
+}
+
+.imagem-destaque img {
     display: block;
     width: 100%;
+    height: 150px;
+    object-fit: cover;
 }
 
-.img {
-    height: 300px;
-}
-
+/* 3. Galeria: três colunas e duas linhas */
 .galeria-jogos {
     background-color: #808080;
-    padding: 0;
+    padding: 10px 0 0;
     margin: 0;
 }
 
-.img-jogos img {
-    display: block;
-    max-width: 100%;
-    height: 50%;
+.img-jogos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-.img-jogos, ul {
-    text-decoration: none;
-    list-style: none;
+.img-jogos li {
+    min-width: 0;
 }
 
 .gal-img {
     position: relative;
     overflow: hidden;
-    border-radius: 14px;
-    /* height: 200px;
-    width: 200px; */
+    margin: 0;
+    height: 160px;
+    background: #FFFFFF;
+    border: 2px solid #808080;
+}
+
+.gal-img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .gal-img figcaption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 14px;
+    color: #FFFFFF;
+    background: #000000;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.gal-img:hover figcaption {
+    transform: translateY(0);
+}
+
+/* 4. Programação e Sobre na mesma linha */
+.informacoes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.informacoes p, h2{
+    color: #FFFFFF;
+}
+
+.informacoes article {
+    min-height: 95px;
+    padding: 16px;
+    background: #808080;
+    border: 2px solid #808080;
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.informacoes h2 {
+    margin: 4px 0 10px;
+    font-size: 18px;
+}
+
+.informacoes p {
+    margin: 0;
+}
+
+/* 5. Rodapé */
+.rodape {
+    margin-top: 10px;
+    padding: 16px;
+    background-image: linear-gradient(-20deg, #808080, #000000);
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.rodape p {
+    margin: 0;
+}
+
+@media (max-width: 650px) {
+    .inicio {
+        flex-direction: column;
+        justify-content: center;
+        padding: 12px;
+    }
+
+    .navegacao {
+        gap: 12px;
+        padding-bottom: 12px;
+    }
+
+    .conteudo-inicio {
+        flex-direction: column;
+    }
+
+    .imagem-destaque {
+        width: 100%;
+    }
+
+    .img-jogos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .informacoes {
+        grid-template-columns: 1fr;
+    }
+}
+
+.galeria-jogos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 10px;
+    width: 100%;
+    padding: 0;
+}
+
+.card-jogo {
+    width: 100%;
+    height: 95px;
+    margin-left: 650px;
+    border: 2px solid #808080;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    border-radius: 14px;
+    position: relative;
+}
+
+.card-jogo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-jogo figcaption {
     position: absolute;
     inset: auto 0 0 0;
     padding: 14px;
@@ -98,15 +260,6 @@ img {
     transition: transform 0.3s ease;
 }
 
-.gal-img:hover figcaption {
+.card-jogo:hover figcaption {
     transform: translateY(0);
-}
-
-.galeria-jogos {
-    display: grid;
-    /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; */
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    margin-top: 8px;
-    grid-column: auto;
 }
